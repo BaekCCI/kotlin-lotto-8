@@ -2,6 +2,7 @@ package lotto
 
 import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
@@ -31,6 +32,14 @@ class LottoCalculatorTest {
     fun `3개 미만으로 일치하면 NONE을 반환한다`(match: Int, hasBonus: Boolean) {
         val rank = Rank.of(match, hasBonus)
         assertThat(rank).isEqualTo(Rank.NONE)
+    }
+
+    @Test
+    fun `로또 계산 결과에 모든 등수가 존재해야한다`() {
+        val rankCount = mapOf(Rank.FIFTH to 2, Rank.THIRD to 1)
+        val result = LottoResult.of(rankCount, 0.0)
+
+        assertThat(result.rankCount.keys).containsAll(Rank.entries)
     }
 
 }
