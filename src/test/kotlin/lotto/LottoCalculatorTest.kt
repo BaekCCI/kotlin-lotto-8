@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -24,7 +25,7 @@ class LottoCalculatorTest {
     @ParameterizedTest(name = "match = {0}, hasBonus = {1} => NONE")
     @CsvSource(
         "2,true",
-        "1,fals",
+        "1,false",
         "0,true"
     )
     fun `3개 미만으로 일치하면 NONE을 반환한다`(match: Int, hasBonus: Boolean) {
