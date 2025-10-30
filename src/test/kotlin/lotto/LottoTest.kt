@@ -2,6 +2,8 @@ package lotto
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class LottoTest {
     @Test
@@ -19,5 +21,13 @@ class LottoTest {
         }
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+    @ParameterizedTest(name = "invalid number = {0}")
+    @ValueSource(ints = [0, 46])
+    fun `로또 번호가 1~45 범위를 벗어나면 예외가 발생한다`(given: Int) {
+        val numbers = listOf(given, 2, 3, 4, 5, 6)
+        assertThrows<IllegalArgumentException> {
+            Lotto(numbers)
+        }
+    }
+
 }
