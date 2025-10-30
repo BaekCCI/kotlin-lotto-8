@@ -1,6 +1,7 @@
 package lotto
 
 import lotto.model.LottoStore
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -20,4 +21,9 @@ class LottoStoreTest {
         }
     }
 
+    @Test
+    fun `구매 금액만큼 로또를 발행한다`() {
+        val lottos = LottoStore.purchaseLottos(5000)
+        assertThat(lottos).hasSize(5)
+    }
 }
