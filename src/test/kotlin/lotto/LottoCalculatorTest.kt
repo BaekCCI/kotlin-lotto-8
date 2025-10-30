@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.LottoResult
 import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -41,5 +42,4 @@ class LottoCalculatorTest {
 
         assertThat(result.rankCount.keys).containsAll(Rank.entries)
     }
-
 }
