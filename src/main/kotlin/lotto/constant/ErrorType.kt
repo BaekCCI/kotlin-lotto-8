@@ -7,7 +7,10 @@ import lotto.constant.LottoConstants.LOTTO_SIZE
 enum class ErrorType(val message: String) {
     INVALID_LOTTO_SIZE("로또 번호는 ${LOTTO_SIZE}개여야 합니다."),
     DUPLICATED_LOTTO_NUMBER("중복된 번호가 있습니다."),
-    INVALID_LOTTO_RANGE("로또 번호는 ${LOTTO_MIN_NUMBER}~${LOTTO_MAX_NUMBER} 범위여야 합니다.");
+    INVALID_LOTTO_RANGE("로또 번호는 ${LOTTO_MIN_NUMBER}~${LOTTO_MAX_NUMBER} 범위여야 합니다."),
+
+    INVALID_BONUS_NUMBER_RANGE("보너스 번호는 ${LOTTO_MIN_NUMBER}~${LOTTO_MAX_NUMBER} 범위여야 합니다."),
+    DUPLICATED_BONUS_NUMBER("당첨 번호와 중복된 번호입니다.");
 
     override fun toString(): String {
         return "$PREFIX $message"
