@@ -6,6 +6,7 @@ import lotto.constant.LottoConstants.LOTTO_MIN_NUMBER
 import lotto.constant.LottoConstants.LOTTO_SIZE
 
 class Lotto(private val numbers: List<Int>) {
+
     init {
         validate()
     }
@@ -23,4 +24,6 @@ class Lotto(private val numbers: List<Int>) {
     fun contains(n: Int): Boolean {
         return numbers.contains(n)
     }
+
+    fun numbers(): List<Int> = numbers.toList()
 }
