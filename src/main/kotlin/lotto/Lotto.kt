@@ -1,14 +1,19 @@
 package lotto
 
+import lotto.constant.ErrorType
+import lotto.constant.LottoConstants.LOTTO_MAX_NUMBER
+import lotto.constant.LottoConstants.LOTTO_MIN_NUMBER
+import lotto.constant.LottoConstants.LOTTO_SIZE
+
 class Lotto(private val numbers: List<Int>) {
     init {
         validate()
     }
 
     private fun validate() {
-        require(numbers.size == 6) { "[ERROR] 로또 번호는 6개여야 합니다." }
-        require(numbers.distinct().size == 6) { "[ERROR] 중복된 번호가 있습니다." }
-        require(numbers.all { it in 1..45 }) { "[ERROR] 로또 번호는 1~45 범위여야 합니다." }
+        require(numbers.size == LOTTO_SIZE) { ErrorType.INVALID_LOTTO_SIZE }
+        require(numbers.distinct().size == LOTTO_SIZE) { ErrorType.DUPLICATED_LOTTO_NUMBER }
+        require(numbers.all { it in LOTTO_MIN_NUMBER..LOTTO_MAX_NUMBER }) { ErrorType.INVALID_LOTTO_RANGE }
     }
 
     fun matchCount(other: Lotto): Int {
