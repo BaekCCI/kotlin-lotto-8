@@ -4,8 +4,14 @@ import lotto.Lotto
 
 object LottoStore {
     fun purchaseLottos(amount: Int): List<Lotto> {
-        validateAmount(amount)
-        return emptyList()
+        val count = amount.toCount()
+
+        return LottoMachine.generateLottos(count)
+    }
+
+    private fun Int.toCount(): Int {
+        validateAmount(this)
+        return this / 1000
     }
 
     private fun validateAmount(amount: Int) {
