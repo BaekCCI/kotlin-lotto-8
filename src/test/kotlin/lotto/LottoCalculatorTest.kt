@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.model.LottoCalculator
 import lotto.model.LottoResult
 import lotto.model.Rank
 import lotto.model.WinningLotto
