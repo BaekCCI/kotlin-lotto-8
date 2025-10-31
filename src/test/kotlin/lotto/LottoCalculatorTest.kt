@@ -2,6 +2,7 @@ package lotto
 
 import lotto.model.LottoResult
 import lotto.model.Rank
+import lotto.model.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -41,5 +42,28 @@ class LottoCalculatorTest {
         val result = LottoResult.of(rankCount, 0.0)
 
         assertThat(result.rankCount.keys).containsAll(Rank.entries)
+    }
+
+    @ParameterizedTest(name = "당첨:\"1,2,3,4,5,6 + 7\", 구매: \"{0}\" -> {1}")
+    @CsvSource(
+        "1,2,3,4,5,6|FIRST",
+        "1,2,3,4,5,7|SECOND",
+        "1,2,3,4,5,8|THIRD",
+        "1,2,3,4,7,8|FOURTH",
+        "1,2,3,4,8,9|FOURTH",
+        "1,2,3,7,8,9|FIFTH",
+        "1,2,3,8,9,10|FIFTH",
+        "1,2,7,8,9,10|NONE",
+        "1,2,8,9,10,11|NONE",
+        delimiter = '|'
+    )
+    fun `구매한 로또와 당첨 로또를 비교하여 등수를 판단한다`(given: String, expected: Rank) {
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val calculator = LottoCalculator(winningLotto)
+
+        val lotto = Lotto(given.split(",").map { it.toInt() })
+        val rank = calculator.getRank(lotto)
+
+        assertThat(rank).isEqualTo(expected)
     }
 }
