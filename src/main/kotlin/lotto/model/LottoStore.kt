@@ -1,7 +1,7 @@
 package lotto.model
 
 import lotto.Lotto
-import lotto.constant.ErrorType
+import lotto.constant.LottoErrorType
 import lotto.constant.LottoConstants.LOTTO_PRICE
 
 object LottoStore {
@@ -16,7 +16,7 @@ object LottoStore {
     }
 
     private fun validateAmount(amount: Int) {
-        require(amount > LOTTO_PRICE) { ErrorType.INVALID_PURCHASE_AMOUNT }
-        require(amount % LOTTO_PRICE == 0) { ErrorType.INVALID_PURCHASE_UNIT }
+        require(amount > LOTTO_PRICE) { LottoErrorType.INVALID_PURCHASE_AMOUNT }
+        require(amount % LOTTO_PRICE == 0) { LottoErrorType.INVALID_PURCHASE_UNIT }
     }
 }

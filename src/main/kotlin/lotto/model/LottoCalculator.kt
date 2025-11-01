@@ -27,7 +27,6 @@ class LottoCalculator(
     }
 
     fun getResult(lottos: List<Lotto>, purchaseAmount: Int): LottoResult {
-
         val ranks = lottos.map { getRank(it) }
             .groupingBy { it }
             .eachCount()
