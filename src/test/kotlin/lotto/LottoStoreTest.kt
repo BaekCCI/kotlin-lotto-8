@@ -8,9 +8,9 @@ import org.junit.jupiter.api.assertThrows
 class LottoStoreTest {
 
     @Test
-    fun `로또 구입 금액이 0보다 작으면 예외가 발생한다`() {
+    fun `로또 구입 금액이 로또 금액보다 작으면 예외가 발생한다`() {
         assertThrows<IllegalArgumentException> {
-            LottoStore.purchaseLottos(0)
+            LottoStore.purchaseLottos(999)
         }
     }
 
