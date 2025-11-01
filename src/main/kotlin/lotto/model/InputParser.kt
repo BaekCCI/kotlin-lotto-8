@@ -9,6 +9,11 @@ object InputParser {
         require(Regex(MONEY_ALLOWED_CHAR_REGEX).matches(input))
         require(Regex(MONEY_THOUSAND_FORMAT_REGEX).matches(input))
 
-        return 0
+        val cleanedInput = input.replace(",", "")
+        val amount = cleanedInput.toIntOrNull()
+        require(amount != null)
+        require(amount > 0)
+
+        return amount
     }
 }
