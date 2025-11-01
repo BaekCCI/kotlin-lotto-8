@@ -47,5 +47,27 @@ class ParserTest {
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["", " ", "    "])
+    fun `당첨번호 입력 시 입력값이 비어있으면 예외 발생`(given: String) {
+        assertThrows<IllegalArgumentException> {
+            InputParser.parseLottoNumbers(given)
+        }
+    }
+
+    @ParameterizedTest(name = "input: {0}")
+    @ValueSource(strings = ["1,2,3,4,5,", ",1,2,3,4,5", "1,2,,3,4,5", "1,2,3,4,@,6"])
+    fun `입력된 당첨 번호에 숫자가 아닌 값이 포함되면 예외 발생`(given: String) {
+        assertThrows<IllegalArgumentException> {
+            InputParser.parseLottoNumbers(given)
+        }
+    }
+
+    @Test
+    fun `쉼표로 구분된 문자열을 정수 리스트로 변환`() {
+        val result = InputParser.parseLottoNumbers("1,2,3,4,5,6")
+        assertThat(result).containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6)
+    }
+
 
 }
