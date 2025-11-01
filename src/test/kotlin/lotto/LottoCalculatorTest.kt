@@ -94,6 +94,38 @@ class LottoCalculatorTest {
     }
 
 
+    @Test
+    fun `로또 결과를 계산한다`() {
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val calculator = LottoCalculator(winningLotto)
+
+        val lottos = listOf(
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(listOf(1, 2, 3, 4, 5, 7)),
+            Lotto(listOf(1, 2, 3, 4, 5, 8)),
+            Lotto(listOf(1, 2, 3, 4, 7, 8)),
+            Lotto(listOf(1, 2, 3, 7, 8, 9)),
+            Lotto(listOf(7, 8, 9, 10, 11, 12)),
+        )
+        val result = calculator.getResult(lottos, 6000)
+
+        assertThat(result.rankCount[Rank.FIRST]).isEqualTo(1)
+        assertThat(result.rankCount[Rank.SECOND]).isEqualTo(1)
+        assertThat(result.rankCount[Rank.THIRD]).isEqualTo(1)
+        assertThat(result.rankCount[Rank.FOURTH]).isEqualTo(1)
+        assertThat(result.rankCount[Rank.FIFTH]).isEqualTo(1)
+        assertThat(result.rankCount[Rank.NONE]).isEqualTo(1)
+
+        val totalPrize = Rank.FIRST.prize +
+                Rank.SECOND.prize +
+                Rank.THIRD.prize +
+                Rank.FOURTH.prize +
+                Rank.FIFTH.prize
+        val expectedProfitRate = (totalPrize / 6000.0) * 100
+
+        assertEquals(expectedProfitRate, result.profitRate, 0.001)
+    }
+
     companion object {
         @JvmStatic
         fun provideRankCounts(): Stream<Arguments> = Stream.of(
