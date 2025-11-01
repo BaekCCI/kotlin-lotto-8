@@ -32,8 +32,12 @@ object InputParser {
 
         return parsedInput
     }
-    fun parseBonusNumber(input:String):Int{
-        return 0
-    }
 
+    fun parseBonusNumber(input: String): Int {
+        require(input.isNotBlank()) { InputErrorType.EMPTY_BONUS_NUMBER }
+        val number = input.toIntOrNull()
+        require(number != null) { InputErrorType.INVALID_BONUS_NUMBER }
+
+        return number
+    }
 }
