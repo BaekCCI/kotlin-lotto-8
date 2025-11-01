@@ -19,7 +19,18 @@ object InputParser {
     fun validateAmountInput(input: String) {
         require(input.isNotBlank()) { InputErrorType.EMPTY_AMOUNT }
         require(Regex(MONEY_ALLOWED_CHAR_REGEX).matches(input)) { InputErrorType.INVALID_CHARACTER_AMOUNT }
-        require(Regex(MONEY_THOUSAND_FORMAT_REGEX).matches(input)) { InputErrorType.INVALID_FORMAT_AMOUNT }
+        require(Regex(MONEY_THOUSAND_FORMAT_REGEX).matches(input)) { InputErrorType.INVALID_AMOUNT_FORMAT }
+    }
+
+    fun parseLottoNumbers(input: String): List<Int> {
+        require(input.isNotBlank()) { InputErrorType.EMPTY_WINNING_NUMBERS }
+
+        val parsedInput = input.split(",").map {
+            require(it.isNotBlank()) { InputErrorType.EMPTY_VALUE_INCLUDED }
+            requireNotNull(it.toIntOrNull()) { InputErrorType.INVALID_NUMBER_FORMAT }
+        }
+
+        return parsedInput
     }
 
 }
