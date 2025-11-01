@@ -25,4 +25,14 @@ class LottoCalculator(
 
         return total / purchaseAmount * 100
     }
+
+    fun getResult(lottos: List<Lotto>, purchaseAmount: Int): LottoResult {
+
+        val ranks = lottos.map { getRank(it) }
+            .groupingBy { it }
+            .eachCount()
+        val profitRate = getProfitRate(ranks, purchaseAmount)
+
+        return LottoResult(ranks, profitRate)
+    }
 }
