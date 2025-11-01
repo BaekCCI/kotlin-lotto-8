@@ -5,9 +5,13 @@ import lotto.model.LottoResult
 import lotto.model.Rank
 import lotto.model.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
 class LottoCalculatorTest {
 
@@ -66,5 +70,67 @@ class LottoCalculatorTest {
         val rank = calculator.getRank(lotto)
 
         assertThat(rank).isEqualTo(expected)
+    }
+
+    @ParameterizedTest(name = "당첨결과 {0} -> 총 수익: {1}")
+    @MethodSource("provideRankCounts")
+    fun `총 수익을 계산한다`(rankCount: Map<Rank, Int>, expected: Long) {
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val calculator = LottoCalculator(winningLotto)
+
+        val result = calculator.getTotalPrize(rankCount)
+        assertEquals(expected, result)
+    }
+
+
+    @ParameterizedTest(name = "당첨결과 {0}, 구매금액 {1} -> 수익률 {2}%")
+    @MethodSource("provideRanksAndPurchaseAmount")
+    fun `로또 수익률을 계산한다`(rankCount: Map<Rank, Int>, purchase: Int, expected: Double) {
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val calculator = LottoCalculator(winningLotto)
+
+        val result = calculator.getProfitRate(rankCount, purchase)
+        assertEquals(expected, result, 0.001)
+    }
+
+
+    companion object {
+        @JvmStatic
+        fun provideRankCounts(): Stream<Arguments> = Stream.of(
+            Arguments.of(
+                mapOf(Rank.FIRST to 1), 2_000_000_000
+            ),
+            Arguments.of(
+                mapOf(Rank.THIRD to 1), 1_500_000
+            ),
+            Arguments.of(
+                mapOf(Rank.FIFTH to 3), 15_000
+            ),
+            Arguments.of(
+                mapOf(Rank.NONE to 3), 0
+            ),
+            Arguments.of(
+                mapOf(Rank.SECOND to 1, Rank.FOURTH to 1, Rank.FIFTH to 2), 30_060_000.0
+            )
+        )
+
+        @JvmStatic
+        fun provideRanksAndPurchaseAmount(): Stream<Arguments> = Stream.of(
+            Arguments.of(
+                mapOf(Rank.FIRST to 1), 1000, 200_000_000.0
+            ),
+            Arguments.of(
+                mapOf(Rank.THIRD to 1), 1000, 150_000.0
+            ),
+            Arguments.of(
+                mapOf(Rank.FIFTH to 3), 3000, 500.0
+            ),
+            Arguments.of(
+                mapOf(Rank.NONE to 3), 3000, 0.0
+            ),
+            Arguments.of(
+                mapOf(Rank.SECOND to 1, Rank.FOURTH to 1, Rank.FIFTH to 2), 4000, 751_500.0
+            )
+        )
     }
 }
