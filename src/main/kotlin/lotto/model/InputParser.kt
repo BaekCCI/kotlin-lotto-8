@@ -1,19 +1,25 @@
 package lotto.model
 
+import lotto.constant.InputErrorType
+
 object InputParser {
     const val MONEY_ALLOWED_CHAR_REGEX = "[\\d,]+"
-    const val MONEY_THOUSAND_FORMAT_REGEX = "^\\d{1,3}(,\\d{3})*$|^d+"
+    const val MONEY_THOUSAND_FORMAT_REGEX = "^\\d{1,3}(,\\d{3})*$|^\\d+$"
 
     fun parseAmount(input: String): Int {
-        require(input.isNotBlank())
-        require(Regex(MONEY_ALLOWED_CHAR_REGEX).matches(input))
-        require(Regex(MONEY_THOUSAND_FORMAT_REGEX).matches(input))
+        validateAmountInput(input)
 
         val cleanedInput = input.replace(",", "")
-        val amount = cleanedInput.toIntOrNull()
-        require(amount != null)
-        require(amount > 0)
+        val amount = cleanedInput.toInt()
+        require(amount > 0) { InputErrorType.NON_POSITIVE_AMOUNT }
 
         return amount
     }
+
+    fun validateAmountInput(input: String) {
+        require(input.isNotBlank()) { InputErrorType.EMPTY_AMOUNT }
+        require(Regex(MONEY_ALLOWED_CHAR_REGEX).matches(input)) { InputErrorType.INVALID_CHARACTER_AMOUNT }
+        require(Regex(MONEY_THOUSAND_FORMAT_REGEX).matches(input)) { InputErrorType.INVALID_FORMAT_AMOUNT }
+    }
+
 }

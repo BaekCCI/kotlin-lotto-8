@@ -34,7 +34,7 @@ class ParserTest {
     }
 
     @ParameterizedTest(name = "input: {0}")
-    @CsvSource("123|123", "1,234|1234", "1,234,567|1234567", "123,456,789|123456789", delimiter = '|')
+    @CsvSource("1234|1234", "123|123", "1,234|1234", "1,234,567|1234567", "123,456,789|123456789", delimiter = '|')
     fun `입력된 금액을 숫자로 변환`(given: String, expected: Int) {
         val result = InputParser.parseAmount(given)
         assertThat(result).isEqualTo(expected)
