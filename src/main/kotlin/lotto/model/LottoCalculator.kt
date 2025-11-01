@@ -15,7 +15,7 @@ class LottoCalculator(
     fun getTotalPrize(rankCount: Map<Rank, Int>): Long {
         var total = 0L
         rankCount.entries.forEach { (rank, count) ->
-            total += rank.prize * count
+            total += rank.prize.toLong() * count
         }
         return total
     }

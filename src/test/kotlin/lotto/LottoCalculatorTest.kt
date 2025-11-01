@@ -142,7 +142,7 @@ class LottoCalculatorTest {
                 mapOf(Rank.NONE to 3), 0
             ),
             Arguments.of(
-                mapOf(Rank.SECOND to 1, Rank.FOURTH to 1, Rank.FIFTH to 2), 30_060_000.0
+                mapOf(Rank.SECOND to 1, Rank.FOURTH to 1, Rank.FIFTH to 2), 30_060_000
             )
         )
 
