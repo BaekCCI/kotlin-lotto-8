@@ -32,5 +32,8 @@ object InputParser {
 
         return parsedInput
     }
+    fun parseBonusNumber(input:String):Int{
+        return 0
+    }
 
 }

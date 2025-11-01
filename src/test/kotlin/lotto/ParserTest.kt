@@ -69,5 +69,24 @@ class ParserTest {
         assertThat(result).containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6)
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["", " ", "    "])
+    fun `보너스 번호 입력 시 값이 비어있으면 예외 발생`(given: String) {
+        assertThrows<IllegalArgumentException> {
+            InputParser.parseBonusNumber(given)
+        }
+    }
 
+    @Test
+    fun `보너스 번호 입력 시 정수가 아니면 예외 발생`() {
+        assertThrows<IllegalArgumentException> {
+            InputParser.parseBonusNumber("&")
+        }
+    }
+
+    @Test
+    fun `입력된 보너스 번호를 정수로 변환`() {
+        val result = InputParser.parseBonusNumber("12")
+        assertThat(result).isEqualTo(12)
+    }
 }
