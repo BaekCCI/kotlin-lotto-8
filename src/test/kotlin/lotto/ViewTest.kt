@@ -7,7 +7,7 @@ import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class OutputViewTest : NsTest() {
+class ViewTest : NsTest() {
     @Test
     fun `구입금액 입력 안내 메세지를 출력한다`() {
         assertSimpleTest {
@@ -76,6 +76,12 @@ class OutputViewTest : NsTest() {
         }
     }
 
+    @Test
+    fun `입력값을 그대로 반환한다`() {
+        run("1234")
+        val result = InputView.read()
+        assertThat(result).isEqualTo("1234")
+    }
 
     override fun runMain() {}
 }
