@@ -1,5 +1,6 @@
 package lotto
 
+import lotto.constant.ErrorType
 import lotto.constant.OutputMessage
 import lotto.model.LottoResult
 import lotto.model.Rank
@@ -50,5 +51,9 @@ object OutputView {
     private fun displayProfitRate(profitRate: Double) {
         val formattedProfitRate = "%.2f".format(profitRate)
         println(OutputMessage.PROFIT_RATE.format(formattedProfitRate))
+    }
+
+    fun displayErrorMessage(message: String) {
+        println(message)
     }
 }

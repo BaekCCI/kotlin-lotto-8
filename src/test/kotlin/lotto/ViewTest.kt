@@ -2,6 +2,8 @@ package lotto
 
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
+import lotto.constant.ErrorType
+import lotto.constant.LottoErrorType
 import lotto.model.LottoResult
 import lotto.model.Rank
 import org.assertj.core.api.Assertions.assertThat
@@ -73,6 +75,14 @@ class ViewTest : NsTest() {
                 "6개 일치 (2,000,000,000원) - 0개",
                 "총 수익률은 429428.57%입니다."
             )
+        }
+    }
+
+    @Test
+    fun `에러 메세지를 출력 시 ERROR로 시작한다`() {
+        assertSimpleTest {
+            OutputView.displayErrorMessage(LottoErrorType.INVALID_LOTTO_SIZE.toString())
+            assertThat(output()).startsWith("[ERROR]")
         }
     }
 
