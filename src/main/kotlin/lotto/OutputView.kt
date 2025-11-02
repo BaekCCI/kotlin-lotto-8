@@ -49,7 +49,7 @@ object OutputView {
     }
 
     private fun displayProfitRate(profitRate: Double) {
-        val formattedProfitRate = "%.2f".format(profitRate)
+        val formattedProfitRate = "%.1f".format(profitRate)
         println(OutputMessage.PROFIT_RATE.format(formattedProfitRate))
     }
 
