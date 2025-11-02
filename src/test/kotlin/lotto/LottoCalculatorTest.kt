@@ -1,9 +1,10 @@
 package lotto
 
-import lotto.model.LottoCalculator
-import lotto.model.LottoResult
-import lotto.model.Rank
-import lotto.model.WinningLotto
+import lotto.domain.model.Lotto
+import lotto.domain.service.LottoCalculator
+import lotto.domain.model.LottoResult
+import lotto.domain.model.Rank
+import lotto.domain.model.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

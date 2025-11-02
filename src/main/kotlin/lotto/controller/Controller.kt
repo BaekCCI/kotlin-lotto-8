@@ -1,10 +1,10 @@
-package lotto
+package lotto.controller
 
-import lotto.constant.InputErrorType
-import lotto.model.InputParser
-import lotto.model.LottoCalculator
-import lotto.model.LottoStore
-import lotto.model.WinningLotto
+import lotto.domain.model.*
+import lotto.domain.service.*
+import lotto.error.InputErrorType
+import lotto.utils.InputParser
+import lotto.view.*
 
 class Controller {
 
@@ -28,10 +28,8 @@ class Controller {
                 val input = InputView.read()
                 val purchaseAmount = InputParser.parseAmount(input)
                 val lottos = LottoStore.purchaseLottos(purchaseAmount)
-                return PurchaseHistory(
-                    purchaseAmount,
-                    lottos
-                )
+
+                return PurchaseHistory(purchaseAmount, lottos)
             } catch (e: IllegalArgumentException) {
                 OutputView.displayErrorMessage(e.message ?: InputErrorType.UNKNOWN.toString())
                 OutputView.displayRetryPrompt()
@@ -50,6 +48,7 @@ class Controller {
             try {
                 val input = InputView.read()
                 val numbers = InputParser.parseLottoNumbers(input)
+
                 return Lotto(numbers)
             } catch (e: IllegalArgumentException) {
                 OutputView.displayErrorMessage(e.message ?: InputErrorType.UNKNOWN.toString())
@@ -64,6 +63,7 @@ class Controller {
             try {
                 val input = InputView.read()
                 val bonusNumber = InputParser.parseBonusNumber(input)
+
                 return WinningLotto(winningLotto, bonusNumber)
             } catch (e: IllegalArgumentException) {
                 OutputView.displayErrorMessage(e.message ?: InputErrorType.UNKNOWN.toString())

@@ -1,10 +1,11 @@
-package lotto.model
+package lotto.domain.service
 
-import lotto.Lotto
-import lotto.constant.LottoErrorType
 import lotto.constant.LottoConstants.LOTTO_PRICE
+import lotto.error.LottoErrorType
+import lotto.domain.model.Lotto
 
 object LottoStore {
+
     fun purchaseLottos(amount: Int): List<Lotto> {
         val count = amount.toLottoCount()
         return LottoMachine.generateLottos(count)

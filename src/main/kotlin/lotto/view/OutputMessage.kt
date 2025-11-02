@@ -1,4 +1,4 @@
-package lotto.constant
+package lotto.view
 
 enum class OutputMessage(val text: String) {
     PURCHASE_AMOUNT_PROMPT("구입금액을 입력해 주세요."),

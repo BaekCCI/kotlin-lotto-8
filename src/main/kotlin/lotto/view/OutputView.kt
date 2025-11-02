@@ -1,11 +1,8 @@
-package lotto
+package lotto.view
 
-import lotto.constant.ErrorType
-import lotto.constant.OutputMessage
-import lotto.model.LottoResult
-import lotto.model.Rank
-import kotlin.collections.component1
-import kotlin.collections.component2
+import lotto.domain.model.Lotto
+import lotto.domain.model.LottoResult
+import lotto.domain.model.Rank
 import kotlin.collections.iterator
 
 object OutputView {
@@ -23,6 +20,7 @@ object OutputView {
     fun displayPurchaseLottos(lottos: List<Lotto>) {
         println()
         println(OutputMessage.PURCHASED_COUNT.format(lottos.size))
+
         lottos.forEach { lotto ->
             println(lotto.numbers().joinToString(", ", "[", "]"))
         }
@@ -32,6 +30,7 @@ object OutputView {
     fun displayWinningStatistics(result: LottoResult) {
         println()
         println(OutputMessage.WINNING_STATISTIC_TITLE)
+
         displayRankMatch(result.rankCount)
         displayProfitRate(result.profitRate)
     }
@@ -39,6 +38,7 @@ object OutputView {
     private fun displayRankMatch(rankCount: Map<Rank, Int>) {
         for ((rank, count) in rankCount) {
             if (rank == Rank.NONE) continue
+
             val matchCount = rank.matchCount
             val formattedPrize = "%,d".format(rank.prize)
 
@@ -52,6 +52,7 @@ object OutputView {
 
     private fun displayProfitRate(profitRate: Double) {
         val formattedProfitRate = "%.1f".format(profitRate)
+
         println(OutputMessage.PROFIT_RATE.format(formattedProfitRate))
     }
 

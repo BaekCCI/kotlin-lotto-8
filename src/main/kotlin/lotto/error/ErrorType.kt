@@ -1,4 +1,4 @@
-package lotto.constant
+package lotto.error
 
 interface ErrorType {
     val message: String

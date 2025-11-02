@@ -2,10 +2,12 @@ package lotto
 
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
-import lotto.constant.ErrorType
-import lotto.constant.LottoErrorType
-import lotto.model.LottoResult
-import lotto.model.Rank
+import lotto.domain.model.Lotto
+import lotto.error.LottoErrorType
+import lotto.domain.model.LottoResult
+import lotto.domain.model.Rank
+import lotto.view.InputView
+import lotto.view.OutputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -37,8 +39,8 @@ class ViewTest : NsTest() {
     @Test
     fun `발행한 로또 수량 및 번호를 출력한다`() {
         val lottos = listOf(
-            listOf(1, 2, 3, 4, 5, 6),
-            listOf(7, 8, 9, 10, 11, 12)
+            Lotto(listOf(1, 2, 3, 4, 5, 6)),
+            Lotto(listOf(7, 8, 9, 10, 11, 12))
         )
         assertSimpleTest {
             OutputView.displayPurchaseLottos(lottos)

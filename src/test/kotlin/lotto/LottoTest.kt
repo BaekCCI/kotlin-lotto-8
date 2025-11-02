@@ -1,6 +1,7 @@
 package lotto
 
-import lotto.model.WinningLotto
+import lotto.domain.model.Lotto
+import lotto.domain.model.WinningLotto
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -68,7 +69,7 @@ class LottoTest {
     @ParameterizedTest(name = "invalid number = {0}")
     @ValueSource(ints = [0, 46])
     fun `보너스 번호가 1~45 범위를 벗어나면 예외가 발생한다`(given: Int){
-        val winningNumbers = Lotto(listOf(1,2,3,4,5,6))
+        val winningNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         assertThrows<IllegalArgumentException> {
             WinningLotto(winningNumbers, given)
@@ -76,7 +77,7 @@ class LottoTest {
     }
     @Test
     fun `보너스 번호가 당첨 번호에 존재하면 예외가 발생한다`(){
-        val winningNumbers = Lotto(listOf(1,2,3,4,5,6))
+        val winningNumbers = Lotto(listOf(1, 2, 3, 4, 5, 6))
 
         assertThrows<IllegalArgumentException> {
             WinningLotto(winningNumbers, 3)

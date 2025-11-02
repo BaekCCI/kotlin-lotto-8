@@ -1,6 +1,6 @@
-package lotto.model
+package lotto.utils
 
-import lotto.constant.InputErrorType
+import lotto.error.InputErrorType
 
 object InputParser {
     const val MONEY_ALLOWED_CHAR_REGEX = "[\\d,]+"
@@ -18,8 +18,12 @@ object InputParser {
 
     fun validateAmountInput(input: String) {
         require(input.isNotBlank()) { InputErrorType.EMPTY_AMOUNT }
-        require(Regex(MONEY_ALLOWED_CHAR_REGEX).matches(input)) { InputErrorType.INVALID_CHARACTER_AMOUNT }
-        require(Regex(MONEY_THOUSAND_FORMAT_REGEX).matches(input)) { InputErrorType.INVALID_AMOUNT_FORMAT }
+        require(Regex(MONEY_ALLOWED_CHAR_REGEX).matches(input)) {
+            InputErrorType.INVALID_CHARACTER_AMOUNT
+        }
+        require(Regex(MONEY_THOUSAND_FORMAT_REGEX).matches(input)) {
+            InputErrorType.INVALID_AMOUNT_FORMAT
+        }
     }
 
     fun parseLottoNumbers(input: String): List<Int> {
@@ -35,6 +39,7 @@ object InputParser {
 
     fun parseBonusNumber(input: String): Int {
         require(input.isNotBlank()) { InputErrorType.EMPTY_BONUS_NUMBER }
+
         val number = input.toIntOrNull()
         require(number != null) { InputErrorType.INVALID_BONUS_NUMBER }
 
