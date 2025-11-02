@@ -11,7 +11,9 @@ enum class InputErrorType(override val message: String) : ErrorType {
     INVALID_NUMBER_FORMAT("숫자가 아닌 값이 포함되어 있습니다."),
 
     EMPTY_BONUS_NUMBER("보너스 번호가 입력되지 않았습니다."),
-    INVALID_BONUS_NUMBER("숫자만 입력 가능합니다.");
+    INVALID_BONUS_NUMBER("숫자만 입력 가능합니다."),
+
+    UNKNOWN("알 수 없는 에러가 발생했습니다.");
 
     override fun toString(): String = fullMessage()
 }

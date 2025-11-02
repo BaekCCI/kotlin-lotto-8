@@ -20,10 +20,10 @@ object OutputView {
 
     fun displayBonusNumberPrompt() = prompt(OutputMessage.BONUS_NUMBER_PROMPT)
 
-    fun displayPurchaseLottos(lottos: List<List<Int>>) {
+    fun displayPurchaseLottos(lottos: List<Lotto>) {
         println(OutputMessage.PURCHASED_COUNT.format(lottos.size))
         lottos.forEach { lotto ->
-            println(lotto.joinToString(", ", "[", "]"))
+            println(lotto.numbers().joinToString(", ", "[", "]"))
         }
     }
 
@@ -39,11 +39,10 @@ object OutputView {
             val matchCount = rank.matchCount
             val formattedPrize = "%,d".format(rank.prize)
 
-            val message = if (rank.hasBonus) {
-                OutputMessage.BONUS_MATCH
-            } else {
-                OutputMessage.NORMAL_MATCH
-            }
+            val message =
+                if (rank.hasBonus) OutputMessage.BONUS_MATCH
+                else OutputMessage.NORMAL_MATCH
+
             println(message.format(matchCount, formattedPrize, count))
         }
     }
@@ -55,5 +54,9 @@ object OutputView {
 
     fun displayErrorMessage(message: String) {
         println(message)
+    }
+
+    fun displayRetryPrompt() {
+        println(OutputMessage.RETRY_PROMPT)
     }
 }
