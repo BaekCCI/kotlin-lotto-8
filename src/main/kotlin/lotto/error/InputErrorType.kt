@@ -2,18 +2,22 @@ package lotto.error
 
 enum class InputErrorType(override val message: String) : ErrorType {
 
+    //입력한 금액 관련 에러
     EMPTY_AMOUNT("구입할 금액이 입력되지 않았습니다."),
     INVALID_CHARACTER_AMOUNT("유효하지 않은 문자가 포함되어 있습니다."),
     INVALID_AMOUNT_FORMAT("천 단위 구분 쉼표(,)의 위치가 올바르지 않습니다."),
     NON_POSITIVE_AMOUNT("구입 금액은 0원보다 커야 합니다."),
 
+    //입력한 로또 번호 관련 에러
     EMPTY_WINNING_NUMBERS("로또 번호가 입력되지 않았습니다."),
     EMPTY_VALUE_INCLUDED("빈 값이 포함되어 있습니다."),
     INVALID_NUMBER_FORMAT("숫자가 아닌 값이 포함되어 있습니다."),
 
+    //입력한 보너스 번호 관련 에러
     EMPTY_BONUS_NUMBER("보너스 번호가 입력되지 않았습니다."),
     INVALID_BONUS_NUMBER("숫자만 입력 가능합니다."),
 
+    //기타
     UNKNOWN("알 수 없는 에러가 발생했습니다.");
 
     override fun toString(): String = fullMessage()
