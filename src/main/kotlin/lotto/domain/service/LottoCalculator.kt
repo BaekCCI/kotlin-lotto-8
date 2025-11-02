@@ -1,5 +1,6 @@
 package lotto.domain.service
 
+import lotto.constant.LottoConstants.PERCENT_UNIT
 import lotto.domain.model.*
 
 class LottoCalculator(private val winningLotto: WinningLotto) {
@@ -23,7 +24,7 @@ class LottoCalculator(private val winningLotto: WinningLotto) {
     fun getProfitRate(rankCount: Map<Rank, Int>, purchaseAmount: Int): Double {
         val total = getTotalPrize(rankCount).toDouble()
 
-        return total / purchaseAmount * 100
+        return total / purchaseAmount * PERCENT_UNIT
     }
 
     fun getResult(lottos: List<Lotto>, purchaseAmount: Int): LottoResult {

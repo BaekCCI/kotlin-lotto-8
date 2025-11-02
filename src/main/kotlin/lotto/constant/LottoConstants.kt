@@ -5,4 +5,5 @@ object LottoConstants {
     const val LOTTO_MAX_NUMBER = 45
     const val LOTTO_SIZE = 6
     const val LOTTO_PRICE = 1_000
+    const val PERCENT_UNIT = 100
 }
