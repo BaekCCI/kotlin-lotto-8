@@ -21,13 +21,16 @@ object OutputView {
     fun displayBonusNumberPrompt() = prompt(OutputMessage.BONUS_NUMBER_PROMPT)
 
     fun displayPurchaseLottos(lottos: List<Lotto>) {
+        println()
         println(OutputMessage.PURCHASED_COUNT.format(lottos.size))
         lottos.forEach { lotto ->
             println(lotto.numbers().joinToString(", ", "[", "]"))
         }
+        println()
     }
 
     fun displayWinningStatistics(result: LottoResult) {
+        println()
         println(OutputMessage.WINNING_STATISTIC_TITLE)
         displayRankMatch(result.rankCount)
         displayProfitRate(result.profitRate)
