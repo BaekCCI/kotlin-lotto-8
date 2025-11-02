@@ -93,6 +93,29 @@ class LottoCalculatorTest {
         assertEquals(expected, result, 0.001)
     }
 
+    @Test
+    fun `등수는 5등부터 1등 순서로 정렬되어 있다`() {
+        val winningLotto = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val calculator = LottoCalculator(winningLotto)
+
+        val lottos = listOf(
+            Lotto(listOf(1, 2, 3, 4, 5, 7)),
+            Lotto(listOf(1, 2, 3, 4, 5, 8)),
+            Lotto(listOf(7, 8, 9, 10, 11, 12)),
+        )
+        val result = calculator.getResult(lottos, 6000)
+        val keys = result.rankCount.keys.toList()
+
+        assertThat(keys).containsExactly(
+            Rank.NONE,
+            Rank.FIFTH,
+            Rank.FOURTH,
+            Rank.THIRD,
+            Rank.SECOND,
+            Rank.FIRST
+        )
+    }
+
 
     @Test
     fun `로또 결과를 계산한다`() {

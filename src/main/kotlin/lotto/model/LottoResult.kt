@@ -7,7 +7,12 @@ data class LottoResult(
     companion object {
         fun of(counts: Map<Rank, Int>, profitRate: Double): LottoResult {
             val allRankCounts = Rank.entries.associateWith { counts[it] ?: 0 }
-            return LottoResult(allRankCounts, profitRate)
+            val sortedRankCounts = allRankCounts.toSortedMap(compareByDescending { it.ordinal })
+
+            return LottoResult(
+                sortedRankCounts,
+                profitRate
+            )
         }
     }
 }

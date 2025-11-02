@@ -32,6 +32,6 @@ class LottoCalculator(
             .eachCount()
         val profitRate = getProfitRate(ranks, purchaseAmount)
 
-        return LottoResult(ranks, profitRate)
+        return LottoResult.of(ranks, profitRate)
     }
 }
