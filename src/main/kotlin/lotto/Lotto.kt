@@ -25,5 +25,5 @@ class Lotto(private val numbers: List<Int>) {
         return numbers.contains(n)
     }
 
-    fun numbers(): List<Int> = numbers.toList()
+    fun numbers(): List<Int> = numbers.sorted()
 }

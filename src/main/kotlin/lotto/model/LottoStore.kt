@@ -16,7 +16,7 @@ object LottoStore {
     }
 
     private fun validateAmount(amount: Int) {
-        require(amount > LOTTO_PRICE) { LottoErrorType.INVALID_PURCHASE_AMOUNT }
+        require(amount >= LOTTO_PRICE) { LottoErrorType.INVALID_PURCHASE_AMOUNT }
         require(amount % LOTTO_PRICE == 0) { LottoErrorType.INVALID_PURCHASE_UNIT }
     }
 }
