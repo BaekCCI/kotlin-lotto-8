@@ -15,7 +15,7 @@ object OutputView {
     fun displayBonusNumberPrompt() = prompt(OutputMessage.BONUS_NUMBER_PROMPT)
 
     fun displayPurchaseLottos(lottos: List<List<Int>>) {
-        println("${lottos.size}개를 구매했습니다.")
+        println(OutputMessage.PURCHASED_COUNT.format(lottos.size))
         lottos.forEach { lotto ->
             println(lotto.joinToString(", ", "[", "]"))
         }
